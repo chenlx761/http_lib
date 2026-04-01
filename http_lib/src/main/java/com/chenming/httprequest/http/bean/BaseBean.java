@@ -1,6 +1,11 @@
 package com.chenming.httprequest.http.bean;
 
+import android.text.TextUtils;
+
+import com.chenming.httprequest.http.HttpManager;
 import com.google.gson.annotations.SerializedName;
+
+import org.w3c.dom.Text;
 
 /**
  * Created by Admin on 2018/3/9.
@@ -8,6 +13,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class BaseBean<T> {
     private HeaderBean header;
+    protected String status;
     protected String code;
     protected String msg;
     protected T data;
@@ -63,10 +69,15 @@ public class BaseBean<T> {
     }
 
     public boolean isSuccess() {
-        if (header!=null)
-            return "1".equals(header.codeX);
 
-        return "1".equals(code);
+        if (header != null)
+            return HttpManager.getRequestSuccessCode().equals(header.codeX);
+
+        if (!TextUtils.isEmpty(status)) {
+            return HttpManager.getRequestSuccessCode().equals(status);
+        }
+
+        return HttpManager.getRequestSuccessCode().equals(code);
     }
 
     public String getCode() {

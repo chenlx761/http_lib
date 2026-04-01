@@ -38,6 +38,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HttpManager {
 
+    private static String mRequestSuccessCode="200";
     private static ApiService apiService;
     private static OkHttpClient okHttpClient;
     private static UploadListener mUploadListener;
@@ -124,6 +125,14 @@ public class HttpManager {
         HttpBaseUrl.Companion.setBASE_URL(baseUrl);
     }
 
+
+    public static String getRequestSuccessCode() {
+        return mRequestSuccessCode;
+    }
+
+    public static void setRequestSuccessCode(String requestSuccessCode) {
+        mRequestSuccessCode = requestSuccessCode;
+    }
 
     /**
      * 在第一次调用api()前使用
