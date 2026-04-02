@@ -190,6 +190,25 @@ public class RetrofitUtil {
     }
 
     /**
+     * post表单同步请求
+     *
+     * @param t   需要返回的类型
+     * @param <T>
+     * @return
+     */
+    public <T> BaseBean<List<T>> postFormSyncGetList(Class<T> t, String... baseurl) {
+
+        try {
+
+            Call<ResponseBody> responseBody = HttpManager.api(baseurl).executePostFormSync(mUrl, mRequestMap, mHeaderMap);
+            return handlerRequestBodyToList(responseBody.execute().body().string(), t);
+        } catch (Exception e) {
+            return null;
+        }
+
+    }
+
+    /**
      * post同步请求
      *
      * @param t   需要返回的类型
@@ -201,6 +220,25 @@ public class RetrofitUtil {
         try {
 
             Call<ResponseBody> responseBody = HttpManager.api(baseurl).executePostSync(mUrl, mRequestMap, mHeaderMap);
+            return handlerRequestBodyToBean(responseBody.execute().body().string(), t);
+        } catch (Exception e) {
+            return null;
+        }
+
+    }
+
+    /**
+     * post表单数据同步请求
+     *
+     * @param t   需要返回的类型
+     * @param <T>
+     * @return
+     */
+    public <T> BaseBean<T> postFormSync(Class<T> t, String... baseurl) {
+
+        try {
+
+            Call<ResponseBody> responseBody = HttpManager.api(baseurl).executePostFormSync(mUrl, mRequestMap, mHeaderMap);
             return handlerRequestBodyToBean(responseBody.execute().body().string(), t);
         } catch (Exception e) {
             return null;

@@ -39,6 +39,11 @@ public interface ApiService {
     @GET()
     Call<ResponseBody> executePostSync(@Url String url, @QueryMap Map<String, Object> map, @HeaderMap HashMap<String, String> headers);
 
+    //同步POST表单数据请求
+    @FormUrlEncoded
+    @GET()
+    Call<ResponseBody> executePostFormSync(@Url String url, @FieldMap Map<String, Object> map, @HeaderMap HashMap<String, String> headers);
+
     //同步PUT请求
     @GET()
     Call<ResponseBody> executePutSync(@Url String url, @QueryMap Map<String, Object> map, @HeaderMap HashMap<String, String> headers);
